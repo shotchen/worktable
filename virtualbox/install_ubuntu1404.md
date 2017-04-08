@@ -11,6 +11,7 @@
 ## change root password
 * sudo su root
 * passwd
+
 ## network config
 * vi /etc/network/interfaces 
     auto eth0
@@ -22,3 +23,18 @@
 * ifdown eth0
 * ifup eth0
 * ifdown --exclude=lo -a && sudo ifup --exclude=lo -a
+
+## install samba
+* apt-get install samba
+* smbpasswd -a cxl
+* vi /etc/samba/smb.conf
+    [global]
+    security = user
+    [homes]
+    browseable = yes
+    public = no
+    writeable = yes
+* /etc/init.d/smbd restart
+
+## install ssh
+* apt-get install openssh-server
