@@ -38,3 +38,10 @@
 
 ## install ssh
 * apt-get install openssh-server
+* vi /etc/ssh/sshd_config 
+     #PermitRootLogin without-password
+     PermitRootLogin yes
+* service ssh restart
+
+
+     
