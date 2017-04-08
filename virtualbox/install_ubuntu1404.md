@@ -8,4 +8,17 @@
 * vboxmanage startvm ubuntu1404-base --type headless
 
 # config system
+## change root password
 * sudo su root
+* passwd
+## network config
+* vi /etc/network/interfaces 
+    auto eth0
+    iface eth0 inet static
+    address 10.0.0.23
+    netmask 255.255.255.0
+    gateway 10.0.0.254
+    dns-nameservers 8.8.8.8 202.106.0.20
+* ifdown eth0
+* ifup eth0
+* ifdown --exclude=lo -a && sudo ifup --exclude=lo -a
