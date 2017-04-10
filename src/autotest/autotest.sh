@@ -22,7 +22,8 @@ if [ ! -f "$1" ] ; then
 fi
 
 emic_echo_info "读取测试数据"
-result=`cat cqbss.json | jq ".testdata[].url"`
+cmd='cat $1 | jq ".testdata[].url"'
+result=eval_cmd cmd
 for row in $result
 do
 	echo "value is $row"

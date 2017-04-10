@@ -37,13 +37,13 @@ function eval_cmd(){
 	emic_echo_base "未输入需执行的命令" fail
 	return false
    fi
-   eval "$1" > $RESULT_FILE && status=0 || status=1 
+   result=eval "$1"  && status=0 || status=1 
    if [ $status -gt 0 ] ; then
 	echo -e "****** $1 [$FAIL_MSG] ******"
    else
 	echo -e "****** $1 [$OK_MSG] ******"
    fi
-   return $status
+   return result
 }
 ###### 显示信息 ######
 function emic_echo_msg(){   
