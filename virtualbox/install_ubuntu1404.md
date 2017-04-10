@@ -48,13 +48,16 @@
 * vboxmanage clonevm "ubuntu1404-base" --name "36-30g1404" --register --basefolder "/home/cxl/virtualbox/vm/"
 * vboxmanage clonevm "ubuntu1404-base" --name "37-30g1404" --register --basefolder "/home/cxl/virtualbox/vm/"
 * vboxmanage clonevm "ubuntu1404-base" --name "38-30g1404" --register --basefolder "/home/cxl/virtualbox/vm/"
+* vboxmanage clonevm "ubuntu1404-base" --name "39-30g1404" --register --basefolder "/home/cxl/virtualbox/vm/"
 * vboxmanage modifyvm ubuntu1404-base --vrde off
 
 # startvm and config vm
 * vboxmanage startvm 36-30g1404 --type headless
 * vboxmanage startvm 37-30g1404 --type headless
 * vboxmanage startvm 38-30g1404 --type headless
+* vboxmanage startvm 39-30g1404 --type headless
 * network config like base vm
 * vboxmanage modifyvm 36-30g1404 --vrde off
 * vboxmanage modifyvm 37-30g1404 --vrde off
 * vboxmanage modifyvm 38-30g1404 --vrde off
+* vboxmanage modifyvm 39-30g1404 --vrde off

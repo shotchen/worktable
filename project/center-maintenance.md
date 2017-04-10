@@ -4,3 +4,5 @@
 * 37 redis
 * 38 mongodb
 * 39 test develope
+
+# 39安装
