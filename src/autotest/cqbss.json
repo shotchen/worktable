@@ -1,5 +1,17 @@
 {
-"testdata":[
-{"url":"tttt"},{"url":"ddddd"}
+"test_name":"BSS自动测试""
+,"test_data":[
+	{
+	"prepare":[
+	 {"command":"mysql -u$MYSQL_USER -p'$MYSQL_PWD' --local-infile=1 -e \"select count(*) from talk.talk_enterprise into outfile '/tmp/$tmpfile'\""}
+	]
+	,"test":[
+	    {"command":""}
+	]
+	,"expect":[
+	 {"command":""}
+	 ,{"command":""}
+	]
+	}
 ]
 }

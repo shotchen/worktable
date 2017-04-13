@@ -34,16 +34,17 @@ function emic_echo_warn(){
 ###### 执行命令行并返回结果 ######
 function eval_cmd(){
    if [ -z "$1" ] ; then
-	emic_echo_base "未输入需执行的命令" fail
+	emic_echo_fail "未输入需执行的命令"
 	return false
    fi
-   result=eval "$1"  && status=0 || status=1 
+   #echo "--$1"
+   eval "$1"  && status=0 || status=1 
    if [ $status -gt 0 ] ; then
 	echo -e "****** $1 [$FAIL_MSG] ******"
    else
 	echo -e "****** $1 [$OK_MSG] ******"
    fi
-   return result
+   return $status
 }
 ###### 显示信息 ######
 function emic_echo_msg(){   

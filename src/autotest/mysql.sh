@@ -6,8 +6,6 @@
 MYSQL_USER="root"
 MYSQL_PWD="C1oudP8x&2017"
 
-function selectdb(){
-    echo "test"
-}
+
 
 

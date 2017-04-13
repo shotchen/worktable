@@ -1,0 +1,13 @@
+{
+    "UNI_AIM_HEAD": {
+        "TIMESTAMP": "2016-12-09 11:27:56.628 ",
+        "SERVICE_NAME": "siBusiOrderOpen",
+        "TRANS_ID": "20161209112756628335423"
+    },
+    "UNI_AIM_BODY": {
+        "OrderInfo": PARAMTERSTR
+    },
+    "UNI_AIM_ATTACHED": {
+        "MEDIA_INFO": ""
+    }
+}
