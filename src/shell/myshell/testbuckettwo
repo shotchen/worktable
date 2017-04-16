@@ -1,0 +1,48 @@
+[ 2017-04-14T14:32:25+08:00 ] /Api/Bss/bssHttp | DEBUG: 获取到BSS请求来自Ip地址为:114.215.144.92
+[ 2017-04-14T14:32:25+08:00 ] /Api/Bss/bssHttp | ERR: Array
+(
+    [Content-Type] => application/json;charset=utf-8
+    [Cache-Control] => no-cache
+    [Pragma] => no-cache
+    [User-Agent] => Java/1.7.0_75
+    [Host] => 123.126.23.70:1046
+    [Accept] => text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+    [Connection] => keep-alive
+    [Content-Length] => 944
+)
+
+[ 2017-04-14T14:32:25+08:00 ] /Api/Bss/bssHttp | ERR: Array
+(
+    [REDIRECT_STATUS] => 200
+    [CONTENT_TYPE] => application/json;charset=utf-8
+    [HTTP_CACHE_CONTROL] => no-cache
+    [HTTP_PRAGMA] => no-cache
+    [HTTP_USER_AGENT] => Java/1.7.0_75
+    [HTTP_HOST] => 123.126.23.70:1046
+    [HTTP_ACCEPT] => text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+    [HTTP_CONNECTION] => keep-alive
+    [CONTENT_LENGTH] => 944
+    [PATH] => /usr/local/bin:/usr/bin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.2.22 (Ubuntu) Server at 123.126.23.70 Port 1046</address>
+
+    [SERVER_SOFTWARE] => Apache/2.2.22 (Ubuntu)
+    [SERVER_NAME] => 123.126.23.70
+    [SERVER_ADDR] => 10.0.0.23
+    [SERVER_PORT] => 1046
+    [REMOTE_ADDR] => 114.215.144.92
+    [DOCUMENT_ROOT] => /var/pbx/mt/maintenance
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/pbx/mt/maintenance/index.php
+    [REMOTE_PORT] => 36144
+    [REDIRECT_URL] => /Api/Bss/bssHttp
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => POST
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /Api/Bss/bssHttp
+    [SCRIPT_NAME] => /index.php
+    [PATH_INFO] => /Api/Bss/bssHttp
+    [PATH_TRANSLATED] => redirect:/index.php/Api/Bss/bssHttp/Bss/bssHttp
+    [PHP_SELF] => /index.php/Api/Bss/bssHttp
+    [REQUEST_TIME] => 1492151545
+)

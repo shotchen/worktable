@@ -1,0 +1,19 @@
+
+Creating Access lists...
+./test_bucket: line 117: Access: command not found
+ERROR found in Access -create -component Development -login ted 
+    -authority plead
+./test_bucket: line 124: Access: command not found
+ERROR found in Access -create -component Development -login pat 
+    -authority general
+./test_bucket: line 131: Access: command not found
+ERROR found in Access -create -component Development -login jim 
+    -authority general
+
+Creating Access lists...
+./test_bucket: line 141: Access: command not found
+ERROR found in Access -create -component Development -login ted -authority projectlead
+./test_bucket: line 141: Access: command not found
+ERROR found in Access -create -component Development -login pat -authority general
+./test_bucket: line 141: Access: command not found
+ERROR found in Access -create -component Development -login jim -authority general

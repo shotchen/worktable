@@ -1,0 +1,30 @@
+######################################
+# 
+# 脚本名称: bss_chongqing
+#
+# 目的:
+#    1、测试重庆bss接口
+#
+# 注意事项：
+#    不能单独执行，通过loadtestbucket调用
+# 
+######################################
+
+testName="bss_chongqing" #保证唯一
+testDesc="重庆bss测试"
+pwd="54321"
+
+# 测试用例组
+function bss_chongqing_testbucket(){    
+    createswitchboard
+    return 0
+}
+
+# 新装总机
+createswitchboard(){
+     local number="02381774908"
+     echo "新装总机"
+
+}
+
+

@@ -1,0 +1,215 @@
+#!/bin/bash
+#
+# Name: test-bucket-1
+#
+# Purpose:
+#    Performs the test-bucket number 1 for Product X.
+#    (Actually, this is a sample shell script, 
+#     which invokes some system commands 
+#     to illustrate how to construct a Bash script) 
+#
+# Notes:
+# 1) The environment variable TEST_VAR must be set 
+#    (as an example).
+# 2) To invoke this shell script and redirect standard 
+#    output and standard error to a file (such as 
+#    test-bucket-1.out) do the following (the -s flag 
+#    is "silent mode" to avoid prompts to the user):
+#
+#    ./test-bucket-1  -s  2>&1  | tee test-bucket-1.out
+#
+# Return codes:
+#  0 = All commands were successful
+#  1 = At least one command failed, see the output file 
+#      and search for the keyword "ERROR".
+#
+########################################################
+
+# ----------------------------
+# Subroutine to echo the usage
+# ----------------------------
+usage()
+{
+ echo "USAGE: $CALLER [-h] [-s]"
+ echo "WHERE: -h = help       "
+ echo "       -s = silent (no prompts)"
+ echo "PREREQUISITES:"
+ echo "* The environment variable TEST_VAR must be set,"
+ echo "* such as: "
+ echo "   export TEST_VAR=1"
+ echo "$CALLER: exiting now with rc=1."
+  exit 1
+}
+# ----------------------------------
+# Subroutine to terminate abnormally
+# ----------------------------------
+terminate()
+{
+ echo "The execution of $CALLER was not successful."
+ echo "$CALLER terminated, exiting now with rc=1."
+ dateTest=`date`
+ echo "End of testing at: $dateTest"
+ echo ""
+  exit 1
+}
+# --------------------------------------------
+# Main routine for performing the test bucket
+# --------------------------------------------
+CALLER=`basename $0`         # The Caller name
+SILENT="no"                  # User wants prompts
+let "errorCounter = 0"
+# ----------------------------------
+# Handle keyword parameters (flags).
+# ----------------------------------
+# For more sophisticated usage of getopt in Linux, 
+# see the samples file: /usr/lib/getopt/parse.bash
+TEMP=`getopt hs $*`
+if [ $? != 0 ]
+then
+ echo "$CALLER: Unknown flag(s)"
+  usage
+fi 
+# Note quotes around `$TEMP': they are essential! 
+eval set -- "$TEMP"
+while true                   
+ do
+  case "$1" in
+   -h) usage "HELP";    shift;; # Help requested
+   -s) SILENT="yes";    shift;; # Prompt not needed
+   --) shift ; break ;; 
+   *) echo "Internal error!" ; exit 1 ;;
+  esac
+ done
+# ------------------------------------------------
+# The following environment variables must be set
+# ------------------------------------------------
+if [ -z "$TEST_VAR" ]
+then
+  echo "Environment variable TEST_VAR is not set."
+  usage
+fi
+
+# -------------------------------------------------
+# Everything seems OK, prompt for confirmation
+# -------------------------------------------------
+if [ "$SILENT" = "yes" ]
+then
+ RESPONSE="y"
+else
+ echo "The $CALLER will be performed."
+ echo "Do you wish to proceed [y or n]? "
+ read RESPONSE                  # Wait for response
+ [ -z "$RESPONSE" ] && RESPONSE="n"
+fi 
+case "$RESPONSE" in
+ [yY]|[yY][eE]|[yY][eE][sS])
+ ;;
+ *)
+  echo "$CALLER terminated with rc=1."
+  exit 1
+ ;;
+esac
+
+# --------------------------------------------------
+echo ""
+echo "Creating Access lists..."
+# --------------------------------------------------
+ Access -create -component Development -login ted -authority plead -verbose
+  if [ $? -ne 0 ] 
+  then 
+  echo "ERROR found in Access -create -component Development -login ted 
+    -authority plead"
+     let "errorCounter = errorCounter + 1" 
+ fi
+ Access -create -component Development -login pat -authority general -verbose
+  if [ $? -ne 0 ] 
+  then 
+  echo "ERROR found in Access -create -component Development -login pat 
+    -authority general"
+     let "errorCounter = errorCounter + 1" 
+ fi
+ Access -create -component Development -login jim -authority general -verbose
+  if [ $? -ne 0 ] 
+  then 
+  echo "ERROR found in Access -create -component Development -login jim 
+    -authority general"
+     let "errorCounter = errorCounter + 1" 
+ fi
+
+CreateAccess()
+{
+ Access -create -component $1 -login $2 -authority $3 -verbose
+  if [ $? -ne 0 ] 
+  then 
+  echo "ERROR found in Access -create -component $1 -login $2 -authority $3"
+     let "errorCounter = errorCounter + 1" 
+ fi
+}
+
+# ------------------------------------------- 
+echo ""
+echo "Creating Access lists..."
+# ------------------------------------------- 
+CreateAccess Development ted    projectlead
+CreateAccess Development pat    general
+CreateAccess Development jim    general
+
+# -------------------------------------------
+# The commands are called in a subroutine 
+# so that return code can be
+# checked for possible errors.
+# -------------------------------------------
+let "errorCounter = 0"
+ListFile()
+{ 
+ echo "ls -al $1"
+ ls -al $1
+  if [ $? -ne 0 ] 
+  then 
+  echo "ERROR found in: ls -al $1"
+     let "errorCounter = errorCounter + 1" 
+fi 
+}
+
+# --------------------------------------------
+echo "Subject: Product X, FVT testing"
+dateTest=`date`
+echo "Begin testing at: $dateTest"
+echo ""
+echo "Testcase: $CALLER"
+echo ""
+# --------------------------------------------
+# --------------------------------------------
+echo ""
+echo "Listing files..."
+# --------------------------------------------
+# The following file should be listed:
+ListFile   $HOME/.profile
+...
+# --------------------------------------------
+echo ""
+echo "Creating file 1"
+# --------------------------------------------
+
+# --------------
+# Exit
+# --------------
+if [ $errorCounter -ne 0 ]
+then
+ echo ""
+ echo "*** $errorCounter ERRORS found during ***"
+ echo "*** the execution of this test case.  ***"
+ terminate
+else
+ echo ""
+ echo "*** Yeah! No errors were found during ***"
+ echo "*** the execution of this test case. Yeah! ***"
+fi 
+echo ""
+echo "$CALLER complete."
+echo ""
+dateTest=`date`
+echo "End of testing at: $dateTest"
+echo ""
+exit 0
+# end of file
