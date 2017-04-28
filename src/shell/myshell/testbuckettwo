@@ -1,48 +1,51 @@
-[ 2017-04-14T14:32:25+08:00 ] /Api/Bss/bssHttp | DEBUG: 获取到BSS请求来自Ip地址为:114.215.144.92
-[ 2017-04-14T14:32:25+08:00 ] /Api/Bss/bssHttp | ERR: Array
-(
-    [Content-Type] => application/json;charset=utf-8
-    [Cache-Control] => no-cache
-    [Pragma] => no-cache
-    [User-Agent] => Java/1.7.0_75
-    [Host] => 123.126.23.70:1046
-    [Accept] => text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
-    [Connection] => keep-alive
-    [Content-Length] => 944
-)
+notExcuteJsonResponse
+{
+    "UNI_AIM_HEAD": {
+       "RESP_CODE ": "00000",
+        "RESP_DESC ": "Success"
+    },
+    "UNI_AIM_BODY": {
+        "ResultInfo": {
+            "ResultCode": "",
+            "ResultMsg": ""
+        }
+    },
+    "UNI_AIM_ATTACHED": {
+        "MEDIA_INFO": ""
+    }
+}
+#  "UNI_AIM_BODY": "1f328ac419ed003c347cf99ca242f1738500d9a6e6387fe053a3f54d565050049410e9cb69c03537e10c0f94e755e4b3e39751634756a8b7bd64b84df44d9f8c72d0bb0a472d780f819e5f59263337b8deb4c9a3980d79949e8285cc3f30c76722ee86de7cbd74a087845ee7d45559ec8ee2cdf7abed6ef089c0df1038fe5d0c0865268957553215178c0122dc16145a0097fc9307ab90ade934839bf9368aa7dd328ecf7bc22869eebe9f8d0a7efc347b74b7f1d12e6e34ade6d91aa4044fd1dd37d32f3b3ebf56d59c6bc5125aedff309beb62abd61d476d5347e30b93cbf0b54c01e026ec26def162008b33a0758687ad48a1b3a87f905fa0b0cc4593915cf8c626cbd3f6c5b19f471000bcd8fbfa95303950f3b38720df7e6ee6381eb643f83a700ac483c54444bf6053ec0cff63ca598c596854bf98a86a9615cc2c4db36b80c2da887af34db7a8504183451f70baba17c9aca779ca38827f996a7c9944",
 
-[ 2017-04-14T14:32:25+08:00 ] /Api/Bss/bssHttp | ERR: Array
-(
-    [REDIRECT_STATUS] => 200
-    [CONTENT_TYPE] => application/json;charset=utf-8
-    [HTTP_CACHE_CONTROL] => no-cache
-    [HTTP_PRAGMA] => no-cache
-    [HTTP_USER_AGENT] => Java/1.7.0_75
-    [HTTP_HOST] => 123.126.23.70:1046
-    [HTTP_ACCEPT] => text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
-    [HTTP_CONNECTION] => keep-alive
-    [CONTENT_LENGTH] => 944
-    [PATH] => /usr/local/bin:/usr/bin:/bin
-    [SERVER_SIGNATURE] => <address>Apache/2.2.22 (Ubuntu) Server at 123.126.23.70 Port 1046</address>
+notExcuteJsonRequest()
+{
+    "UNI_AIM_HEAD": {
+        "TIMESTAMP": "2016-12-09 11:27:56.628 ",
+        "SERVICE_NAME": "siBusiOrderOpen",
+        "TRANS_ID": "20161209112756628335423"
+    },
+    "UNI_AIM_BODY": {
+        "OrderInfo": {
+            "OrderSn": "",
+            "Operate": "CreateSwitchboard",
+            "Mode": "接入模式",
+            "EpName": "客户名称",
+            "LoginName": "注册账户",
+            "Password": "注册密码",
+            "Number": "总机号码",
+            "PhysicalNumber": "物理号码",
+            "MaxMember": "最大分机数",
+            "PerPrice": "实际每分机的价格",
+            "BusinessType": "业务类型",
+            "CallPermission": "呼叫权限",
+            "ContactName": "企业联系人姓名",
+            "ContacMobile": "企业联系人电话号码",
+            "ContactEmail": "企业联系人电子邮箱",
+            "MobileNumber": "云总机企业的管理员手机号码"
+        }
+    },
+    "UNI_AIM_ATTACHED": {
+        "MEDIA_INFO": ""
+    }
+}
 
-    [SERVER_SOFTWARE] => Apache/2.2.22 (Ubuntu)
-    [SERVER_NAME] => 123.126.23.70
-    [SERVER_ADDR] => 10.0.0.23
-    [SERVER_PORT] => 1046
-    [REMOTE_ADDR] => 114.215.144.92
-    [DOCUMENT_ROOT] => /var/pbx/mt/maintenance
-    [SERVER_ADMIN] => webmaster@localhost
-    [SCRIPT_FILENAME] => /var/pbx/mt/maintenance/index.php
-    [REMOTE_PORT] => 36144
-    [REDIRECT_URL] => /Api/Bss/bssHttp
-    [GATEWAY_INTERFACE] => CGI/1.1
-    [SERVER_PROTOCOL] => HTTP/1.1
-    [REQUEST_METHOD] => POST
-    [QUERY_STRING] => 
-    [REQUEST_URI] => /Api/Bss/bssHttp
-    [SCRIPT_NAME] => /index.php
-    [PATH_INFO] => /Api/Bss/bssHttp
-    [PATH_TRANSLATED] => redirect:/index.php/Api/Bss/bssHttp/Bss/bssHttp
-    [PHP_SELF] => /index.php/Api/Bss/bssHttp
-    [REQUEST_TIME] => 1492151545
-)
+######################################

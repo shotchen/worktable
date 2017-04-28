@@ -1,6 +1,6 @@
 ######################################
 # 
-# 脚本名称: loadtestbucket.conf
+# 脚本名称: emic.conf
 #
 # 目的:
 #    1、配置类
@@ -18,4 +18,17 @@ is_update_wiki=0
 is_sendmail=0
 
 # 日志文件名称
-log_filename="emic.log"
+emic_log_file="emic.log"
+
+# mysql配置
+mysql_user="root"
+mysql_pwd="C1oudP8x&2017"
+mysql_host="10.0.0.23"
+
+# 服务器配置
+maintenance_ip="10.0.0.23"
+enterprise_ip="10.0.0.23"
+
+# bss测试配置
+cq_bss_pwd="9a7d485124d3cd788fb1c0ecb1103321"
+

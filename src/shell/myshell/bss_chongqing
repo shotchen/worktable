@@ -4,27 +4,116 @@
 #
 # 目的:
 #    1、测试重庆bss接口
-#
+# 
 # 注意事项：
 #    不能单独执行，通过loadtestbucket调用
+#    先在mysql里设置允许远程访问的权限，在运维服务器和企业服务器的mysql中执行一下语句，授权测试机器访问mysql数据库
+#    grant all on *.* to root@10.0.0.40 identified by 'C1oudP8x&2017' with grant option;
+# 作者:cxl
 # 
 ######################################
 
-testName="bss_chongqing" #保证唯一
 testDesc="重庆bss测试"
-pwd="54321"
+testSwitchNumber="02312345678"
+testDirectNumber="02323456789"
+testMeetNumber="023345678901"
+pwd="9a7d485124d3cd788fb1c0ecb1103321"
+dateTest=`date +'%Y-%m-%d %H:%M:%S'`
+cqRequestFinalStr='{"UNI_AIM_HEAD":{"TIMESTAMP":"$dateTest","SERVICE_NAME":"siBusiOrderOpen","TRANS_ID":"100"},"UNI_AIM_BODY":"EMIC_NEED_REPLACE","UNI_AIM_ATTACHED":{"MEDIA_INFO":""}}'
+cqRequestStr='{"OrderInfo":{"EMIC_NEED_REPLACE"}}'
+cqResponseFinalStr='{"UNI_AIM_HEAD":{"RESP_CODE ":"00000","RESP_DESC ": "Success"},"UNI_AIM_BODY": "EMIC_NEED_REPLACE",,"UNI_AIM_ATTACHED":{"MEDIA_INFO":""}}'
+cqResponseStr='{"ResultInfo": {"ResultCode": "EMIC_NEED_REPLACE_CODE","ResultMsg": "EMIC_NEED_REPLACE_MSG"}}'
+    
+
+# 测试用例准备函数
+bss_chongqing(){
+    #echo "in bss_chongqing"
+    local sql="use talk"
+    local status=1
+    emic_eval_mysql "$sql" && status=0 || status=1
+    if [ $status -gt 0 ] 
+    then 
+        print_log "无法连接到mysql" "error"
+        return $status
+    fi
+    sql="update talk.talk_param set \\\`value\\\`='chongqing' where \\\`key\\\`='server_province';"
+    emic_eval_mysql "$sql" && status=0 || status=1
+    if [ $status -gt 0 ] ; then return $status; fi
+
+    #sql="select m_key,m_value from maintenance.m_system_param where m_key='server_province';"
+    #local resultFile=`make_tmp_file ".result"`
+    #emic_eval_mysql "$sql" "$resultFile" && status=0 || status=1
+    #if [ $status -gt 0 ] ; then return $status; fi
+    #sed -n '$p' $resultFile | awk '{print $2}'
+    sql="update maintenance.m_system_param set m_value='chongqing' where m_key='server_province';"
+    emic_eval_mysql "$sql" && status=0 || status=1
+    if [ $status -gt 0 ] ; then return $status; fi
+    return $status
+}
 
 # 测试用例组
-function bss_chongqing_testbucket(){    
-    createswitchboard
+bss_chongqing_testbucket(){ 
+    print_log "--$testDesc" info
+    eval "createswitchboard"
+    
+    #print_log "---------------------" info
     return 0
 }
 
-# 新装总机
 createswitchboard(){
-     local number="02381774908"
-     echo "新装总机"
+    local number="02381774908"
+    local maxMember=66
+    local epName="我们是害虫"
+    
+    if [ -n "$1" ] ; then number="$1"; fi
+    if [ -n "$2" ] ; then maxMember=$2; fi
+    if [ -n "$3" ] ; then epName=$3; fi
 
+    local status=1
+    local paramter="Operate=createswitchboard&EpName=${epName}&Number=${number}&MaxMember=${maxMember}"
+    local jsonData=`parseParamToJson "$paramter"`
+    local md5Str=`md5_str "$pwd" "true"`
+
+    #echo "原始字符串："$jsonData
+    #echo "md5Str:$md5Str"
+    local encryptStr=`cq_encrypt_str "$jsonData" "$md5Str"` && status=0 || status=1
+    if [ $status -gt 0 ] 
+    then 
+        print_log "------ [新装总机]加密提交数据失败 " "error"
+        return $status
+    fi
+    local reqJson=${cqRequestFinalStr/EMIC_NEED_REPLACE/"$encryptStr"}
+    #curl -i -H "Content-type:application/json; charset=UTF-8" -H "Accept:application/json" -H "Accept-Encoding:gzip" -d @createswitchboard.txt  http://127.0.0.1:1046/Api/Bss/bssHttp
+    local resultFile=`make_tmp_file ".result"`
+    emic_eval_command "curl -s -H \"Content-type:application/json; charset=UTF-8\" -H \"Accept:application/json\"  -d '$reqJson'  http://10.0.0.23:1046/Api/Bss/bssHttp" "$resultFile"
+    local retJson=`cat $resultFile | jq '.UNI_AIM_BODY'| sed 's/"//g'`
+    local retVal=`cq_decrypt_str "$retJson" "$md5Str" | jq '.ResultInfo.ResultCode' | sed 's/"//g'`
+    if [ -n "$retVal" ] && [ "$retVal" == "0000" ]
+    then
+        print_log "------ [新装总机]成功" info
+        sql="select count(*) from maintenance.m_enterprise where epname='$epName';"
+        #local resultFile=`make_tmp_file ".result"`
+        emic_eval_mysql "$sql" "$resultFile" && status=0 || status=1
+        #if [ $status -gt 0 ] ; then return $status; fi
+        #sed -n '$p' $resultFile | awk '{print $2}'
+    else
+        local retMsg=`cq_decrypt_str "$retJson" "$md5Str" | jq '.ResultInfo.ResultMsg' | sed 's/"//g'`
+        print_log "------ [新装总机]失败[原因]$retMsg" error
+    fi
+    #local decryptStr=`cq_decrypt_str "$retJson" "$md5Str" | jq '.ResultInfo.ResultCode'`
+    #echo "decryptStr:$decryptStr"
+    rm "$resultFile" -rf
+    return $status;
 }
 
+parseParamToJson(){
+    if [ -z "$1" ] ; then return 1; fi
+    local status=0
+    echo "$1" | sed 's/=/\":\"/g'|sed 's/&/\",\"/g'
+    return $status
+}
+
+parseReturn(){
+    
+}
 
