@@ -1,0 +1,20 @@
+<OrderList xmlns="http://www.wzjqsj.cn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.wzjqsj.cn DNS_XML_Schema.xsd">
+  <Body>
+	<item>
+		<MobileInfo xmlns="http://www.wzjqsj.cn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.wzjqsj.cn DNS_XML_Schema.xsd">
+			<Head>
+				<ClientID>cxl</ClientID>
+				<SessionID>10000</SessionID>
+				<TransactionID>50000</TransactionID>
+				<Timestamp>2017-01-01 23:00:00</Timestamp>
+			</Head>
+			<Body>
+				<Identifier>EMIC_NEED_REPLACE_EPCODE</Identifier>
+				<Type>1</Type>
+				<Operate>EMIC_NEED_REPLACE_OPERATE</Operate>
+				<MobileNumber>EMIC_NEED_REPLACE_MOBILENUMBER</MobileNumber>
+			</Body>
+		</MobileInfo >
+	</item>
+  </Body>
+</OrderList>

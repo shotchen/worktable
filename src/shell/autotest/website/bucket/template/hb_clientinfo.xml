@@ -1,0 +1,27 @@
+<OrderList xmlns="http://www.wzjqsj.cn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.wzjqsj.cn DNS_XML_Schema.xsd">
+  <Body>
+    <item>
+		<ClientInfo xmlns="http://www.wzjqsj.cn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.wzjqsj.cn DNS_XML_Schema.xsd">
+			<Head>
+				<ClientID>cxl</ClientID>
+				<SessionID>10000</SessionID>
+				<TransactionID>50000</TransactionID>
+				<Timestamp>2017-01-01 23:00:00</Timestamp>
+			</Head>
+			<Body>
+				<ClientName>EMIC_NEED_REPLACE_EPNAME</ClientName>
+				<Industry>10011</Industry>
+				<Address>河北省范西路</Address>
+				<City>130100</City>
+				<Unique>11100000011</Unique>
+				<Identifier>EMIC_NEED_REPLACE_EPCODE</Identifier>
+				<ClientType>1</ClientType>
+				<LinkMan>张三</LinkMan>
+				<Telephone>031186050529</Telephone>
+				<CredentialType>10</CredentialType>
+				<Credential>34876356-D</Credential>
+			</Body>
+		</ClientInfo>
+	</item>
+  </Body>
+</OrderList>

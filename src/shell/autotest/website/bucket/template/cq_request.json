@@ -1,0 +1,11 @@
+{
+    "UNI_AIM_HEAD":{
+        "TIMESTAMP":"2017-01-01 00:00:00"
+        ,"SERVICE_NAME":"siBusiOrderOpen"
+        ,"TRANS_ID":"100"
+   }
+   ,"UNI_AIM_BODY":"EMIC_NEED_REPLACE"
+   ,"UNI_AIM_ATTACHED":{
+        "MEDIA_INFO":""
+   }
+}

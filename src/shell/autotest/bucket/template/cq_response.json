@@ -1,0 +1,10 @@
+{
+    "UNI_AIM_HEAD":{
+        "RESP_CODE ":"00000"
+        ,"RESP_DESC ": "Success"
+        }
+   ,"UNI_AIM_BODY": "EMIC_NEED_REPLACE"
+   ,"UNI_AIM_ATTACHED":{
+        "MEDIA_INFO":""
+        }
+}

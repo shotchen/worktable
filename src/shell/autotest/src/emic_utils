@@ -1,0 +1,210 @@
+######################################
+# 
+# 脚本名称: emic_utils
+#
+# 目的:
+#    1、工具类
+#
+# 注意事项：
+#    不能单独执行，通过source包含
+#
+# 作者: chenxuelin@emicnet.com
+# 
+######################################
+
+emic_utils(){
+    return 0
+}
+
+# 声明变量
+RED_COLOR='\E[1;31m'   #红
+GREEN_COLOR='\E[1;32m' #绿
+YELOW_COLOR='\E[1;33m' #黄
+BLUE_COLOR='\E[1;34m'  #蓝
+PINK_COLOR='\E[1;35m'  #粉红
+RES='\E[0m'
+OK_VAL="成功"
+FAIL_VAL="失败"
+OK_MSG="${GREEN_COLOR}${OK_VAL}${RES}"
+FAIL_MSG="${RED_COLOR}${FAIL_VAL}${RES}"
+
+# ----------------------------
+# 显示成功信息
+# ----------------------------
+function emic_echo_success(){
+    echo -e "${GREEN_COLOR}$1${RES}" && return 0 || return 1
+}
+# ----------------------------
+# 显示失败信息
+# ----------------------------
+function emic_echo_fail(){
+    echo -e "${RED_COLOR}$1${RES}" && return 0 || return 1
+}
+# ----------------------------
+# 显示提示信息
+# ----------------------------
+function emic_echo_info(){
+    echo -e "${BLUE_COLOR}$1${RES}" && return 0 || return 1
+}
+# ----------------------------
+# 显示警告信息
+# ----------------------------
+function emic_echo_warn(){    
+    echo -e "${PINK_COLOR}$1${RES}" && return 0 || return 1   
+}
+# ----------------------------
+# 显示调试信息
+# ----------------------------
+function emic_echo_debug(){
+    echo -e "$1" && return 0 || return 1
+}
+# ----------------------------
+# 返回临时文件名
+# 调用方式 result=`make_tmp_file ".report" 6 0 "emicTmp_"`
+#          result=`make_tmp_file` 
+# ----------------------------
+function make_tmp_file(){
+    local tmpFileName="emicTmp_"
+    local ext=""
+    local randCount=6
+    local randStr=""
+    local isDir=0
+    local status=1
+    if [ -n "$1" ] ; then ext="$1"; fi
+    if [ -n "$2" ] 
+    then 
+        if [ "$2" -gt 0 ] 2>/dev/null ; then randCount=$2; fi     
+    fi
+    if [ -n "$3" ] ; then isDir=1; fi
+    if [ -n "$4" ] ; then tmpFileName="$4"; fi
+    while [ "$randCount" -gt 0 ]
+    do
+        randStr=${randStr}X
+        let "randCount--"
+    done
+    tmpFileName=${tmpFileName}${randStr}${ext}  
+    if [ $isDir -gt 0 ]
+    then
+        mktemp -d "$tmpFileName" && status=0 || status=1
+    else
+        mktemp "$tmpFileName" && status=0 || status=1
+    fi
+    return $status
+}
+
+# ----------------------------
+# 在数组或字符串中寻找另一个字符串
+# ----------------------------
+emic_indexOf(){
+    if [ -z "$1" ] ; then return 1; fi
+    if [ -z "$2" ] ; then return 2; fi
+    for x in $2
+    do
+	    if [ $x = $1 ] ; then return 0; fi
+    done
+    return 3
+}
+# ----------------------------
+# 判断命令是否存在
+# ----------------------------
+command_exist(){
+    command -v "$1" >/dev/null 2>&1 && return 0 || return 1
+}
+# ----------------------------
+# 返回大写
+# 例如：UPPERCASE=$(echo $VARIABLE | tr '[a-z]' '[A-Z]')   (把VARIABLE的小写转换成大写)
+#       LOWERCASE=$(echo $VARIABLE | tr '[A-Z]' '[a-z]')   (把VARIABLE的大写转换成小写)
+# ----------------------------
+emic_strtoupper(){
+    echo -n "$1" | tr '[a-z]' '[A-Z]' && return 0 || return 1
+}
+emic_strtolow(){
+    echo -n "$1" | tr '[A-Z]' '[a-z]' && return 0 || return 1
+}
+emic_get_province(){
+    
+    if [ -z "$1" ] ; then echo "江苏";return 0; fi
+    case $1 in
+        jiangsu) echo "江苏" ;;
+        shaanxi) echo "陕西" ;;
+        shanxi) echo "山西" ;;
+        anhui) echo "安徽" ;;
+        jiangxi) echo "江西" ;;
+        shandong) echo "山东" ;;
+        hunan) echo "湖南" ;;
+        henan) echo "河南" ;;
+        hebei) echo "河北" ;;
+        guangdong) echo "广东" ;;
+        guangxi) echo "广西" ;;
+        beijing) echo "北京" ;;
+        shanghai) echo "上海" ;;
+        zhejiang) echo "浙江" ;;
+        liaoning) echo "辽宁" ;;
+        xizang) echo "西藏" ;;
+        xinjiang) echo "新疆" ;;
+        fujian) echo "福建" ;;
+        hubei) echo "湖北" ;;
+        yunnan) echo "云南" ;;
+        guizhou) echo "贵州" ;;
+        chongqing) echo "重庆" ;;
+        sichuan) echo "四川" ;;
+        gansu) echo "甘肃" ;;
+        tianjin) echo "天津" ;;
+        jilin) echo "吉林" ;;
+        heilongjiang) echo "黑龙江" ;;
+        neimenggu) echo "内蒙古" ;;
+        qinghai) echo "青海" ;;
+        hainan) echo "海南" ;;
+        ningxia) echo "宁夏" ;;
+        *) echo "未知" ;;
+    esac
+    return 0
+}
+emic_get_areacode(){
+    if [ -z "$1" ] ; then echo "025"; fi
+    case $1 in
+        jiangsu) echo "025" ;;
+        shaanxi) echo "029" ;;
+        shanxi) echo "0351" ;;
+        anhui) echo "0551" ;;
+        jiangxi) echo "0791" ;;
+        shandong) echo "0531" ;;
+        hunan) echo "0730" ;;
+        henan) echo "0371" ;;
+        hebei) echo "0311" ;;
+        guangdong) echo "020" ;;
+        guangxi) echo "0771" ;;
+        beijing) echo "010" ;;
+        shanghai) echo "021" ;;
+        zhejiang) echo "0571" ;;
+        liaoning) echo "024" ;;
+        xizang) echo "0891" ;;
+        xinjiang) echo "0991" ;;
+        fujian) echo "0591" ;;
+        hubei) echo "027" ;;
+        yunnan) echo "0871" ;;
+        guizhou) echo "0851" ;;
+        chongqing) echo "023" ;;
+        sichuan) echo "028" ;;
+        gansu) echo "0931" ;;
+        tianjin) echo "022" ;;
+        jilin) echo "0431" ;;
+        heilongjiang) echo "0451" ;;
+        neimenggu) echo "0471" ;;
+        qinghai) echo "0971" ;;
+        hainan) echo "0898" ;;
+        ningxia) echo "0951" ;;
+        *) echo "025";;
+    esac
+    return 0
+}
+
+parse_to_json(){
+    if [ -z "$1" ] ; then return 1; fi
+    local status=0
+    echo "$1" | sed 's/=/\":\"/g'|sed 's/&/\",\"/g' && status=0 || status=1
+    return $status
+}
+
+parse_to_array(){
+}
