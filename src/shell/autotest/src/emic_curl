@@ -1,0 +1,30 @@
+######################################
+# 
+# 脚本名称: emic_curl
+#
+# 目的:
+#    1、curl类
+#
+# 注意事项：
+#    不能单独执行，通过source包含
+#
+# 作者: chenxuelin@emicnet.com
+# 
+######################################
+
+# ----------------------------
+#  访问远程地址
+#  调用方式
+#       emic_curl "url" "postdata" "cookie file" "header"
+# ----------------------------
+function emic_curl(){
+    if [ -z "$1" ]; then return 1; fi
+    if [ -z "$emic_log_file" ] ;then emic_log_file='/tmp/emic_log_file.log'; fi
+    local level="debug"
+    if [ -n "$2" ] ; then level="$2"; fi
+    local logDate=`date +'%Y-%m-%d %H:%M:%S'`
+    level=$(echo $level | tr [:lower:] [:upper:])
+    local status=1
+    echo "$level $logDate $1" >> $emic_log_file && status=0 || status=1
+    return $status
+}
